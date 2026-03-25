@@ -1,0 +1,19 @@
+{
+  "name": "myecypress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^15.12.0"
+  },
+  "dependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "xlsx": "^0.18.5"
+  }
+}

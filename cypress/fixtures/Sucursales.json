@@ -1,0 +1,18 @@
+[
+  {
+    "usuario": "Office",
+    "password": "office123",
+    "empresa": "SINCOSOFT DESARROLLO M&E",
+    "sucursales": [
+      {
+        "Sucursal_1": "Equipos de Alquiler Propios"
+      },
+      {
+        "Sucursal_2": "Departamento de mantenimiento"
+      }
+    ],
+    "idEquipoPreoperacional": "2",
+    "proyecto": "Alquiler",
+    "ubicacion": "equipos"
+  }
+]
