@@ -33,7 +33,7 @@ export const iniciar_sesion = function () {
 
 };
 
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 export const cerrar_sesion = function () {
 
     //BTN CAMBIO DE SUCURSAL Y CIERRE DE SESIÓN
@@ -42,9 +42,9 @@ export const cerrar_sesion = function () {
     cy.get('.css-dgbjf5 > .MuiTypography-root').click();
 
 }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-export const preoperacional = function () {
-
+export const llenado_equipo_proyecto_ubicacion = function () {
     //PREOPERACIONAL
     cy.get(':nth-child(2) > .MuiPaper-root > .css-kljmsf > .MuiGrid2-container > .MuiGrid2-grid-xs-4 > img')
         .click().wait(4000)
@@ -63,6 +63,41 @@ export const preoperacional = function () {
     cy.get('#UbiacionXObra').click()
         .type(this.Sucursales[0].ubicacion).wait(3000).type("{enter}")
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export const llenado_equipo_proyecto_ubicacion_item = function () {
+    //PREOPERACIONAL
+    cy.get(':nth-child(2) > .MuiPaper-root > .css-kljmsf > .MuiGrid2-container > .MuiGrid2-grid-xs-4 > img')
+        .click().wait(4000)
+    //Seleccionar equipo
+    cy.get('#Equipo')
+        .type(this.Sucursales[0].idEquipoPreoperacional).wait(2000).type("{enter}");
+
+
+    //Seleccionar proyecto, ubicación y medidor
+    //proyecto
+    cy.get('#Obra').click().clear()
+        .type(this.Sucursales[0].proyecto).wait(4000).type("{enter}")
+
+
+    //Ubicación
+    cy.get('#UbiacionXObra').click()
+        .type(this.Sucursales[0].ubicacion).wait(3000).type("{enter}")
+
+    //Item
+
+    cy.get('#ItemsObra').click();
+
+    cy.get('ul[role="listbox"] li')
+        .should('be.visible')
+        .first()
+        .click();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+export const validar_medidores_sin_superar = function () {
 
     //Medidor 1 o 2
 
@@ -103,6 +138,56 @@ export const preoperacional = function () {
     //BTN CONSULTAR
 
     cy.get('.MuiBox-root > .MuiButtonBase-root').wait(3000).click()
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+export const validar_medidores_superando = function () {
+
+    //Medidor 1 o 2
+
+    function sumarMedidor(selector) {
+        cy.get(selector)
+            .invoke('attr', 'placeholder')
+            .then((placeholder) => {
+
+                const actual = parseInt(placeholder) || 0;
+                const nuevo = actual + 100000;
+
+
+                cy.get(selector)
+                    .clear()
+                    .type(nuevo);
+
+
+            });
+
+    }
+
+    // MEDIDOR 1 (siempre existe)
+    sumarMedidor('[id="Medidor1-Trabajo:"]');
+
+    // MEDIDOR 2 (solo si existe)
+    cy.get('body').then(($body) => {
+
+        if ($body.find('[id="Medidor2-Trabajo:"]').length > 0) {
+
+            sumarMedidor('[id="Medidor2-Trabajo:"]');
+
+        } else {
+            cy.log('Medidor2 no aparece en esta prueba');
+        }
+
+    });
+
+    //BTN CONSULTAR
+
+    cy.get('.MuiBox-root > .MuiButtonBase-root').wait(3000).click()
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+export const preoperacional = function () {
+
+
 
     //Actividades y OBS
     cy.get('.MuiCard-root').eq(1).wait(2000).click()
@@ -156,59 +241,6 @@ export const preoperacional = function () {
     cy.contains('button', 'Enviar')
         .click().wait(3000);
 
-
-
-
 }
-
-
-export const medidores = function () {
-
-    //Medidor 1 o 2
-
-    function sumarMedidor(selector) {
-        cy.get(selector)
-            .invoke('attr', 'placeholder')
-            .then((placeholder) => {
-
-                const actual = parseInt(placeholder) || 0;
-                const nuevo = actual + 100000;
-
-
-                cy.get(selector)
-                    .clear()
-                    .type(nuevo);
-
-
-            });
-
-    }
-
-    // MEDIDOR 1 (siempre existe)
-    sumarMedidor('[id="Medidor1-Trabajo:"]');
-
-    // MEDIDOR 2 (solo si existe)
-    cy.get('body').then(($body) => {
-
-        if ($body.find('[id="Medidor2-Trabajo:"]').length > 0) {
-
-            sumarMedidor('[id="Medidor2-Trabajo:"]');
-
-        } else {
-            cy.log('Medidor2 no aparece en esta prueba');
-        }
-
-    });
-    //BTN CONSULTAR
-
-    cy.get('.MuiBox-root > .MuiButtonBase-root').wait(3000).click()
-
-
-}
-
-
-
-
-
 
 
