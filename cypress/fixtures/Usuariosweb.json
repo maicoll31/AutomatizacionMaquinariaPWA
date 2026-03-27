@@ -2,12 +2,12 @@
   {
     "urlweb":"https://cumbal-loc.sincoerp.com/SincoOk/V3/Marco/Default_iv.aspx",
     "Urlapp":"https://www1.sincoerp.com/SincoPlusMyE/V3/Maquinaria/Web/",
-    "usuario": "Office",
-    "password": "office123",
-    "empresa":  "SINCOSOFT DESARROLLO M&E",
+    "usuario": "maicolp2024",
+    "password": "Admin12345*",
+    "empresa":  "DEMO SAS",
     "sucursales": [
       {
-        "Sucursal_1": "Equipos de Alquiler Propios"
+        "Sucursal_1": "3277"
       },
       {
         "Sucursal_2": "Departamento de mantenimiento"

@@ -187,8 +187,6 @@ export const validar_medidores_superando = function () {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 export const preoperacional = function () {
 
-
-
     //Actividades y OBS
     cy.get('.MuiCard-root').eq(1).wait(2000).click()
     cy.get('.MuiCard-root').eq(2).wait(2000).click()
@@ -231,6 +229,11 @@ export const preoperacional = function () {
 
     cy.contains('button', 'Terminar y enviar reporte')
         .click();
+
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export const observaciones_finales_y_enviar = function () {
     //Observaciones generales
 
     cy.get('#outlined-multiline-static')
@@ -243,4 +246,82 @@ export const preoperacional = function () {
 
 }
 
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export const seleccionar_hora_inicial_preoperacional = function () {
+
+    cy.contains('Hora inicio')
+        .parents('.MuiFormControl-root')
+        .within(() => {
+
+            cy.get('[aria-label="Hours"]')
+                .type('08', { force: true });
+
+            cy.get('[aria-label="Minutes"]')
+                .type('30', { force: true });
+
+            cy.get('[aria-label="Meridiem"]')
+                .type('AM', { force: true }).wait(2000);
+
+            //cy.contains('button', 'Aceptar').click()
+        });
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export const seleccionar_hora_final_preoperacional = function () {
+
+    cy.contains('Hora final')
+        .parents('.MuiFormControl-root')
+        .within(() => {
+
+            cy.get('[aria-label="Hours"]')
+                .type('08', { force: true });
+
+            cy.get('[aria-label="Minutes"]')
+                .type('50', { force: true });
+
+            cy.get('[aria-label="Meridiem"]')
+                .type('AM', { force: true }).wait(2000);
+
+            //cy.contains('button', 'Aceptar').click()
+        });
+
+}//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export const iniciar_sesion_web = function () {
+
+    cy.visit(this.Sucursales[0].urlweb);
+
+    //CAMPO USUARIO
+    cy.get('#txtUsuario')
+        .wait(2000).click()
+        .type(this.Usuariosweb[0].usuario);
+
+    //CAMPO CONTRASEÑA
+    cy.get('#txtContrasena')
+        .wait(2000).click()
+        .type(this.Usuariosweb[0].password);
+
+    //BTN CONSULTAR
+    cy.get('#btnSiguiente')
+        .wait(3000).click().wait(2000);
+    //EMPRESA
+    cy.get('#ddlEmpresa')
+        .select(this.Usuariosweb[0].empresa);
+
+    //SUCURSAL
+
+    cy.get('#txtSucursal').click()
+        .clear().wait(1000)
+        .type(this.Usuariosweb[0].sucursales[0].Sucursal_1).type("{enter}");
+
+
+    //BTN INGRESSAR
+    //cy.get('.css-ef1vrg > .css-1msr7s0 > .css-t42gh3 > .css-12ugur8 > .css-16gx1x3 > .css-ogz4a3 > .css-1swzdn0 > :nth-child(3) > .MuiGrid2-grid-md-12 > .css-134mtex > .css-16lfw73 > .css-1ndb9qj > .MuiStack-root > .MuiGrid2-container > .MuiGrid2-root > .MuiButtonBase-root')
+    //.click().wait(5000);
+
+};
 
